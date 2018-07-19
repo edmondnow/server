@@ -4,9 +4,15 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const app = express();
 const router = require('./router');
+const mongoose = require('mongoose');
+
+
+//DB setup 
+mongoose.connect('mongodb://localhost:27017/auth', { useNewUrlParser: true})
+console.log('Connected to mongod.')
 
 //App Setup
-app.use(morgan);
+app.use(morgan("combined"));
 app.use(bodyParser.json({ type: '*/*'}));
 router(app);
 
